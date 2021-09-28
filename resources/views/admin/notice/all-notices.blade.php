@@ -5,19 +5,16 @@
        <div class="row ">
                 <div class="col-lg-9 margin-tb">
                     <div class="pull-left">
-                        <h2></h2>
+                        <h2>all Notices </h2>
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-success" href="{{ route('gallery.create') }}"> Create New Product</a>
+                        <a class="btn btn-success" href="/add-notices"> Create New notice</a>
                     </div>
                 </div>
             </div>
-            
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
+            @if(Session::has('notice_deleted'))
+                            <h6 class="alert alert-success"> {{ Session::get('notice_deleted') }}</h6>
+                        @endif
             
             <table class="table table-bordered">
                 <tr>
@@ -30,25 +27,23 @@
                     
                     <th width="280px">Action</th>
                 </tr>
-                @foreach (  $galleries as $item)
+                @foreach (  $notices as $notice)
                 <tr>
-                    <td>{{ ++$i }}</td>
-                    <td><img src="uploads/gallery/{{ $item->image }}" width="100px"></td>
-                    <td>{{ $item->name }}</td>
-                   
-                    <td>
-                        <form action="{{ route('gallery.destroy',$item->id) }}" method="POST">
-            
-                            
-            
-                            <a class="btn btn-primary" href="{{ route('gallery.edit',$item->id) }}">Edit</a>
-            
-                            @csrf
-                            @method('DELETE')
-                
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                    <td>{{ $notice->id }}</td>
+                    <td> {{ $notice->title }} </td>
+                    <td> {{ $notice->link }} </td>
+                    <td> {{ $notice->text }} </td>
+
+                    <td><img src="uploads/notice/{{ $notice->image }}" width="100px"></td>
+                    <td> 
+                        <a href="/edit-notices/{{$notice->id}}" class="btn btn-info ">Edit </a>
+                        <a href="/delete-notice/{{$notice->id}}" class="btn btn-danger ">Delete </a>
+
+
                     </td>
+                    
+                   
+                 
                 </tr>
                 @endforeach
             </table>

@@ -42,6 +42,10 @@ Route::resource('/gallery', GalleryController::class);
 Route::get('/add-notices',[NoticeController::class,'addNotice']);
 Route::post('/add-notices',[NoticeController::class,'NoticeStore'])->name('notice.store');
 Route::get('/all-notices',[NoticeController::class,'notices']);
+Route::get('/edit-notices/{id}',[NoticeController::class,'editNotice']);
+Route::post('/update-notice',[NoticeController::class,'updateNotice'])->name('notice.update');
+Route::get('/delete-notice/{id}',[NoticeController::class,'deleteNotice']);
+
 
 
 
