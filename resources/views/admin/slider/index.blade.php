@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
   <div class="col-md-12">
-    <a href="{{ url('add-sliderimage') }}" class="btn-btn primary float-end"> add new slideImage</a>
+  @if(Session::has('success'))
+                            <h6 class="alert alert-success"> {{ Session::get('success') }}</h6>
+       @endif
+            
+    <a href="{{ url('add-sliderimage') }}" class="btn btn-primary pull-right"> add new slideImage</a>
       
     <table class="table">
               <thead class="thead-dark">
@@ -28,7 +32,7 @@
                   </td>
                   <td> 
                     <a href="{{ url('edit-sliderimage/'.$item->id)}}" class="btn btn-primary btn-sm">  Edit </a>
-                    <a href="" class="btn btn-danger btn-sm">  Delete </a>
+                    <a href="{{ url('delete-sliderimage/'.$item->id) }}" class="btn btn-danger btn-sm">  Delete </a>
 
 
                   </td>

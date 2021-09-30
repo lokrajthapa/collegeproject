@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 class SliderController extends Controller
@@ -33,7 +34,7 @@ class SliderController extends Controller
 
          }
          $slider->save();
-         return redirect()->back()->with('success','Slider image Stored successfully');
+         return redirect()->back()->with('success','Slider image updated successfully');
 
 
 
@@ -43,14 +44,14 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         return view('admin.slider.edit',compact('slider'));
      }
-     public function update(Request $request)
+     public function update(Request $request, $id)
      {   
-         $slider =Slider::find($request->id); 
+         $slider = Slider::find($id); 
          $slider->title = $request->input('title');
          if($request->hasfile('slider_image'))
          {
              $destination ='uploads/sliders/'.$slider->slider_image;
-             if(File::exits($destination))
+             if(File::exists($destination))
              { 
                  File::delete($destination);
 
@@ -65,4 +66,10 @@ class SliderController extends Controller
          $slider->update();
          return redirect()->back()->with('status','Slider image updated successfully');
      }
+     public function destroy($id)
+    {
+        $slider = Slider::find($id);
+        $slider->delete();
+        return back()->with('success','Product deleted successfully');
+    }
 }

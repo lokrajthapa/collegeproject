@@ -8,7 +8,7 @@
        @endif
        <div class="card-header"> 
        <h4> Add new Slider </h4>
-        <a href="{{ url('sliders')}}" class="btn btn-danger float-end"> Back</a>
+        <a href="{{ url('sliderimages')}}" class="btn btn-danger float-end"> Back</a>
        </div>
     
       <form action="{{  ('add-sliderimage')}}" method="POST" enctype="multipart/form-data">
